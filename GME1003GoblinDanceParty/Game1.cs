@@ -25,7 +25,7 @@ namespace GME1003GoblinDanceParty
         private float _starScale;       //star size
         private float _starTransparency;//star transparency
         private float _starRotation;    //star rotation
-
+        private List<float> _starsScale; // list of scale (size) values
 
         //***This is for the goblin. Ignore it.
         Goblin goblin;
@@ -56,6 +56,12 @@ namespace GME1003GoblinDanceParty
             for (int i = 0; i < _numStars; i++)
             {
                 _starsTransparency.Add(_rng.Next(25, 101) / 100f); // values between 0.25f and 1f
+            }
+
+            _starsScale = new List<float>();
+            for (int i = 0; i < _numStars; i++)
+            {
+                _starsScale.Add(_rng.Next(50, 101) / 200f); // values between 0.25f and 0.5f
             }
 
             _starColor = new Color(128 + _rng.Next(0,129), 128 + _rng.Next(0, 129), 128 + _rng.Next(0, 129));                   //this is a "relatively" easy way to create random colors
@@ -136,7 +142,7 @@ namespace GME1003GoblinDanceParty
                     _starColor * _starsTransparency[i],     // use individual transparency
                     _starsRotation[i],                      // each star has its own rotation                        
                     new Vector2(_starSprite.Width / 2, _starSprite.Height / 2), //ignore this
-                    new Vector2(_starScale, _starScale),    //set scale (same number 2x)
+                    new Vector2(_starsScale[i], _starsScale[i]), // individual size for each star
                     SpriteEffects.None,                     //ignore this
                     0f);                                    //ignore this
             }
